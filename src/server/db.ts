@@ -1,6 +1,6 @@
 import { DatabaseSync } from 'node:sqlite'
 
-// Zero-dep, embedded SQLite (Node 24). Filen support.db oprettes automatisk.
+// Zero-dep, embedded SQLite (Node 24). support.db is created automatically.
 export const db = new DatabaseSync('support.db')
 
 db.exec(`
@@ -17,15 +17,15 @@ db.exec(`
   )
 `)
 
-// Seed et par tickets foerste gang, saa koeen ikke er tom.
+// Seed a couple of tickets on first run so the queue isn't empty.
 const { n } = db.prepare('SELECT COUNT(*) AS n FROM tickets').get() as { n: number }
 if (n === 0) {
   const insert = db.prepare(
     `INSERT INTO tickets (category, description, affected_scope, priority, assigned_to, sla_minutes, status, created_at)
      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
   )
-  insert.run('printer', 'Printeren paa 2. sal er loebet toer for toner', 'team', 'normal', 'Anna', 480, 'queued', '2026-07-06T08:00:00Z')
-  insert.run('login', 'Kan ikke logge ind i loensystemet', 'me', 'normal', 'Cille', 480, 'queued', '2026-07-06T08:05:00Z')
+  insert.run('printer', 'The printer on the 2nd floor is out of toner', 'team', 'normal', 'Anna', 480, 'queued', '2026-07-06T08:00:00Z')
+  insert.run('login', 'Cannot log in to the payroll system', 'me', 'normal', 'Cille', 480, 'queued', '2026-07-06T08:05:00Z')
 }
 
 export type TicketInput = {

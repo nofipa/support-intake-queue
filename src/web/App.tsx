@@ -13,8 +13,8 @@ type Ticket = {
   status: string
 }
 
-// Naiv intake-form der matcher det naive backend (faerdige felter).
-// OPGAVE: byg dette om til en rigtig chat, hvor bot'en selv spoerger ind (se README).
+// Naive intake form matching the naive backend (ready-made fields).
+// TASK: turn this into a real chat where the bot asks its own follow-ups (see README).
 export function App() {
   const [category, setCategory] = useState('')
   const [description, setDescription] = useState('')
@@ -39,7 +39,7 @@ export function App() {
     const data = await res.json()
     if (data.status === 'need_more') setMessage(`Bot: ${data.question}`)
     else {
-      setMessage(`Ticket #${data.ticket.id} oprettet (${data.ticket.priority}, ${data.ticket.assigned_to})`)
+      setMessage(`Ticket #${data.ticket.id} created (${data.ticket.priority}, ${data.ticket.assigned_to})`)
       loadTickets()
     }
   }
@@ -48,18 +48,18 @@ export function App() {
     <main style={{ fontFamily: 'system-ui', maxWidth: 640, margin: '2rem auto' }}>
       <h1>Support intake</h1>
       <div style={{ display: 'grid', gap: 8, maxWidth: 360 }}>
-        <input placeholder="kategori (fx printer)" value={category} onChange={(e) => setCategory(e.target.value)} />
-        <input placeholder="beskrivelse" value={description} onChange={(e) => setDescription(e.target.value)} />
+        <input placeholder="category (e.g. printer)" value={category} onChange={(e) => setCategory(e.target.value)} />
+        <input placeholder="description" value={description} onChange={(e) => setDescription(e.target.value)} />
         <select value={affectedScope} onChange={(e) => setAffectedScope(e.target.value)}>
-          <option value="me">rammer kun mig</option>
-          <option value="team">rammer mit team</option>
-          <option value="all">rammer alle</option>
+          <option value="me">affects only me</option>
+          <option value="team">affects my team</option>
+          <option value="all">affects everyone</option>
         </select>
         <button onClick={submit}>Send</button>
       </div>
       {message && <p>{message}</p>}
 
-      <h2>Koe</h2>
+      <h2>Queue</h2>
       <ul>
         {tickets.map((t) => (
           <li key={t.id}>

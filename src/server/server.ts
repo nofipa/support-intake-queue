@@ -28,7 +28,7 @@ const server = createServer(async (req, res) => {
     return json(res, 200, listTickets())
   }
 
-  // POST /intake { gathered } -> enten et opfoelgende spoergsmaal eller en oprettet ticket.
+  // POST /intake { gathered } -> either a follow-up question or a created ticket.
   if (req.method === 'POST' && req.url === '/intake') {
     const body = await readBody(req)
     const gathered: Gathered = body.gathered ?? {}
@@ -52,4 +52,4 @@ const server = createServer(async (req, res) => {
   json(res, 404, { error: 'not found' })
 })
 
-server.listen(PORT, () => console.log(`API paa http://localhost:${PORT}`))
+server.listen(PORT, () => console.log(`API on http://localhost:${PORT}`))

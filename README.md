@@ -1,38 +1,38 @@
-# Support intake + koe (case)
+# Support intake + queue (case)
 
-En lille, koerende support-intake-app. Din opgave er at forbedre den. Vi er mere interesserede i *hvordan* du arbejder, isaer med AI, end i et poleret resultat. Regn med omkring en time. Byg en fungerende slice, ikke et faerdigt produkt. Brug dit eget AI-setup, som du ville paa jobbet.
+A small, working support-intake app. Your job is to improve it. We care more about *how* you work, especially with AI, than about a polished result. Expect it to take about an hour. Build a working slice, not a finished product. Use your own AI setup, exactly as you would on the job.
 
-## Koer projektet
-Ingen Docker, ingen database-server. SQLite er indbygget (Node 24). Du skal bruge **Node 24+**.
+## Run it
+No Docker, no database server. SQLite is built in (Node 24). You need **Node 24+**.
 
 ```
-npm install          # kun for React-frontend'en
-npm run dev:api      # backend paa http://localhost:3000 (ingen deps, koerer TypeScript direkte)
-npm run dev:web      # frontend paa http://localhost:5173 (ny terminal)
-npm test             # backend-tests (node:test)
+npm install          # only for the React frontend
+npm run dev:api      # backend on http://localhost:3000 (no deps, runs TypeScript directly)
+npm run dev:web      # frontend on http://localhost:5173 (new terminal)
+npm test             # backend tests (node:test)
 ```
 
-Backend ligger i `src/server/` (Node + `node:sqlite`, zero-dep). Frontend i `src/web/` (React + Vite).
+Backend lives in `src/server/` (Node + `node:sqlite`, zero-dep). Frontend in `src/web/` (React + Vite).
 
-## Dine opgaver
+## Your tasks
 
-**1. Fix en bug.** Round-robin-tildelingen i `src/server/queue.ts` virker ikke: alle tickets i samme kategori faar tildelt den *samme* agent. Reproducer den med en test, og fix den.
+**1. Fix a bug.** The round-robin assignment in `src/server/queue.ts` is broken: all tickets in the same category get assigned the *same* agent. Reproduce it with a test, then fix it.
 
-**2. Tilfoej feature'en (kernen).** Den nuvaerende "er der nok info"-gate i `src/server/intake.ts` er en naiv placeholder, der antager faerdige felter. Byg den om til en **LLM-drevet** gate, hvor:
-- brugeren skriver i **fri tekst**,
-- bot'en selv afgoer, om der er nok info til en ticket, ellers stiller et **maalrettet** opfoelgende spoergsmaal,
-- og bot'en **ikke finder paa** (hallucinerer) de felter, den ikke har faaet.
-Vis, at du testede den adfaerd.
+**2. Add the feature (the core).** The current "is there enough info" gate in `src/server/intake.ts` is a naive placeholder that assumes ready-made fields. Rebuild it as an **LLM-driven** gate where:
+- the user types in **free text**,
+- the bot decides on its own whether there is enough info to create a ticket, otherwise asks a **targeted** follow-up question,
+- and the bot does **not fabricate** (hallucinate) the fields it was not given.
+Show that you tested this behavior.
 
-**3. Haandter edge cases.** Fx tom besked, rent vroevl, eller en besked der allerede har nok info i sig.
+**3. Handle edge cases.** For example an empty message, pure gibberish, or a message that already contains enough info.
 
-Du bestemmer selv datamodellen, hvad "nok info" betyder, felterne, koe-/prioriterings-reglerne, og hvordan du loeser det. Der er ikke ét rigtigt svar. **Skriv dine antagelser ned.**
+You decide the data model, what "enough info" means, the fields, the queue/prioritization rules, and how you solve it. There is no single right answer. **Write down your assumptions.**
 
-## Aflever
-Vi forventer ikke, at det er faerdigt. Aflever:
-- **En kort plan/tilgang:** hvordan greb du det an, og hvorfor.
-- **Din fungerende slice**, saa langt du naaede.
-- **Din raa AI-/agent-session** (ikke pyntet).
-- **Antagelser + review:** dine vigtigste antagelser, og hvad du ville teste eller tjekke foer produktion.
+## What to submit
+We do not expect it to be finished. Submit:
+- **A short plan/approach:** how you tackled it, and why.
+- **Your working slice**, as far as you got.
+- **Your raw AI/agent session** (unedited).
+- **Assumptions + review:** your key assumptions, and what you would test or check before production.
 
-Bagefter tager vi en kort snak, hvor du gaar os gennem loesningen, ogsaa de dele AI genererede.
+Afterwards we will have a short conversation where you walk us through your solution, including the parts AI generated.

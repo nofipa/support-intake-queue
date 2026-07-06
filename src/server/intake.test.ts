@@ -3,29 +3,29 @@ import assert from 'node:assert/strict'
 import { assess } from './intake.ts'
 import { prioritize, slaFor } from './queue.ts'
 
-test('assess: manglende felter -> need_more (og opretter ikke)', () => {
+test('assess: missing fields -> need_more (does not create)', () => {
   const r = assess({ category: 'printer' })
   assert.equal(r.status, 'need_more')
 })
 
-test('assess: tomt/whitespace felt taeller ikke som udfyldt', () => {
+test('assess: empty/whitespace field does not count as filled', () => {
   const r = assess({ category: 'printer', description: '   ', affectedScope: 'me' })
   assert.equal(r.status, 'need_more')
 })
 
-test('assess: alle felter til stede -> ready', () => {
-  const r = assess({ category: 'printer', description: 'virker ikke', affectedScope: 'me' })
+test('assess: all fields present -> ready', () => {
+  const r = assess({ category: 'printer', description: 'not working', affectedScope: 'me' })
   assert.equal(r.status, 'ready')
 })
 
-test('prioritize: rammer alle -> high + kort SLA', () => {
-  assert.equal(prioritize({ description: 'noget', affectedScope: 'all' }), 'high')
+test('prioritize: affects everyone -> high + short SLA', () => {
+  assert.equal(prioritize({ description: 'something', affectedScope: 'all' }), 'high')
   assert.equal(slaFor('high'), 60)
 })
 
-test('prioritize: enkelt bruger -> normal', () => {
-  assert.equal(prioritize({ description: 'lille ting', affectedScope: 'me' }), 'normal')
+test('prioritize: single user -> normal', () => {
+  assert.equal(prioritize({ description: 'small thing', affectedScope: 'me' }), 'normal')
 })
 
-// Bemaerk: der er BEVIDST ingen test af assign(). Den har en bug (opgave 1) -
-// kandidaten skal selv reproducere den med en test og fikse den.
+// Note: there is deliberately no test for assign(). It has a bug (task 1) -
+// the candidate should reproduce it with a test and fix it.

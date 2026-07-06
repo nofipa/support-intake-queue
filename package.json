@@ -1,5 +1,5 @@
 {
-  "name": "support-intake-seed",
+  "name": "support-intake-queue",
   "private": true,
   "type": "module",
   "scripts": {
