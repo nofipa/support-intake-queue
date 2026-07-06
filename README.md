@@ -39,4 +39,12 @@ We do not expect it to be finished. Submit:
 - **Your raw AI/agent session** (unedited).
 - **Assumptions + review:** your key assumptions, and what you would test or check before production.
 
+### How to send it
+- **Code:** push to a **private** repo and invite us, or send a zip of the folder (include the `.git` folder so the history comes along). Please don't push to a public fork.
+- **AI session:** attach the raw, unedited history from your AI tool:
+  - Claude Code: the session transcript in `~/.claude/projects/<project>/*.jsonl`
+  - Cursor / Codex / other: export the chat or session
+
+  You don't need to add timestamps or clean anything up. We want the raw thing, and how you worked matters more than a polished transcript.
+
 Afterwards we will have a short conversation where you walk us through your solution, including the parts AI generated.
