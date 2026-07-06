@@ -1,6 +1,8 @@
 # Support intake + queue (case)
 
-A small, working support-intake app. Your job is to improve it. We care more about *how* you work, especially with AI, than about a polished result. Expect it to take about an hour. Build a working slice, not a finished product. Use your own AI setup, exactly as you would on the job.
+A small, working support-intake app. Your job is to improve it. We care more about *how* you work, especially with AI, than about a polished result. Budget about an hour (a guideline, not a hard limit). Build a working slice, not a finished product. Use your own AI setup, exactly as you would on the job.
+
+If you run low on time, **task 2 below is what we weight most** - task 1 is a warm-up.
 
 ## Run it
 No Docker, no database server. SQLite is built in (Node 24). You need **Node 24+**.
@@ -16,13 +18,15 @@ Backend lives in `src/server/` (Node + `node:sqlite`, zero-dep). Frontend in `sr
 
 ## Your tasks
 
-**1. Fix a bug.** The round-robin assignment in `src/server/queue.ts` is broken: all tickets in the same category get assigned the *same* agent. Reproduce it with a test, then fix it.
+**1. Fix a bug (warm-up).** There is a bug in the assignment logic in `src/server/queue.ts`. Find it, reproduce it with a test, and fix it.
 
 **2. Add the feature (the core).** The current "is there enough info" gate in `src/server/intake.ts` is a naive placeholder that assumes ready-made fields. Rebuild it as an **LLM-driven** gate where:
 - the user types in **free text**,
 - the bot decides on its own whether there is enough info to create a ticket, otherwise asks a **targeted** follow-up question,
 - and the bot does **not fabricate** (hallucinate) the fields it was not given.
 Show that you tested this behavior.
+
+> Note: your coding assistant (Claude Code, Codex, a subscription, etc.) is not the same as the app's LLM. For the gate itself you can use your own API key, ask us for a temporary one, or stub the LLM behind a clean interface. A stub is completely fine - and it makes it easy to test that your guard catches a hallucinated response.
 
 **3. Handle edge cases.** For example an empty message, pure gibberish, or a message that already contains enough info.
 

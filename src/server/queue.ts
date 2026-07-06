@@ -19,8 +19,8 @@ export function slaFor(priority: 'high' | 'normal'): number {
   return SLA_MINUTES[priority]
 }
 
-// TASK 1 (bug): round-robin is broken - all tickets in the same category get
-// assigned the SAME agent. Reproduce it with a test, then fix it.
+// TASK 1 (bug): there is a bug in this function. Find it, reproduce it with a
+// test, and fix it.
 let _rr = 0
 export function assign(category: string): string {
   const team = TEAMS[category] ?? DEFAULT_TEAM
