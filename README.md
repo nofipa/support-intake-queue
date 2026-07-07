@@ -28,7 +28,7 @@ Show that you tested this behavior.
 
 > Note: your coding assistant (Claude Code, Codex, a subscription, etc.) is not the same as the app's LLM. For the gate itself you can use your own API key, ask us for a temporary one, or stub the LLM behind a clean interface. A stub is completely fine - and it makes it easy to test that your guard catches a hallucinated response.
 
-**3. Handle edge cases.** For example an empty message, pure gibberish, or a message that already contains enough info.
+**3. Handle edge cases.** For example an empty message, pure gibberish, or a message that already contains enough info. If you stubbed the LLM: the stub simply returning nothing for gibberish is fine - we care that no ticket gets created, not how well you detect nonsense. Don't build a gibberish detector.
 
 You decide the data model, what "enough info" means, the fields, the queue/prioritization rules, and how you solve it. There is no single right answer. **Write down your assumptions.**
 
