@@ -40,7 +40,7 @@ We do not expect it to be finished. Submit:
 - **Assumptions + review:** your key assumptions, and what you would test or check before production.
 
 ### How to send it
-- **Code:** push to a **private** repo and invite us, or send a zip of the folder (include the `.git` folder so the history comes along). Please don't push to a public fork.
+- **Code:** push the case, with your commits on top, to a fresh repo of your own (keep the git history). Public or private is fine - if you make it private, remember to invite us. Or send a zip of the folder (include the `.git` folder so the history comes along).
 - **AI session:** attach the raw, unedited history from your AI tool:
   - Claude Code: the session transcript in `~/.claude/projects/<project>/*.jsonl`
   - Cursor / Codex / other: export the chat or session
